@@ -1,6 +1,7 @@
+// ! variables
+
 const board = document.getElementById("board");
 const cells = document.querySelectorAll(".cell");
-let xTurn = 0;
 /*
 |  0  1  2  |
 |  3  4  5  |
@@ -19,6 +20,19 @@ const winningCombination = [
     [0, 4, 8],
     [2, 4, 6],
 ];
+const gameBox = document.getElementById('gameBox')
+const gameMessage = document.getElementById('gameMessage')
+const restartBtn = document.getElementById('restartBtn')
+// to handle turn and score
+const xScore = document.querySelector('#xScore')
+const oScore = document.querySelector('#oScore')
+const currentTurn = document.querySelector('#currentTurn')
+
+let xTurn = 0;
+let moveCount = 0;
+
+
+// ! functions
 
 // clear all marks
 const resetBoard = () => {
@@ -53,6 +67,7 @@ const handleClick = cell => {
     cell.addEventListener(
         "click",
         () => {
+            moveCount++
             cell.classList.add(xTurn ? "cross" : "circle");
 
             // check win
@@ -61,8 +76,16 @@ const handleClick = cell => {
                 console.log(`${currentClass} Wins`);
             }
 
+            // check if board is full
+            else if (moveCount >= 9){
+                console.log('draw')
+            }
+
             // swap turn
             xTurn = xTurn ? false : true;
+
+            // update turn
+            currentTurn.innerText = xTurn ? "X" : "O";
         },
         { once: true }
     );
@@ -84,11 +107,17 @@ const startGame = () => {
     // reset the board by clearing all mark
     resetBoard();
 
+    // reset moves
+    moveCount = 0
+
     // add hover event listener
     cells.forEach(cell => handleHover(cell));
 
     // add click event listener
     cells.forEach(cell => handleClick(cell));
 };
+
+
+// ! driver code
 
 startGame();

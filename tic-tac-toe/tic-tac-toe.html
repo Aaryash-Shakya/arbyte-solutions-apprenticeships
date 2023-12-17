@@ -21,6 +21,17 @@
         <div class="cell"></div>
         <div class="cell"></div>
     </div>
+    <!-- position fixed to top -->
+    <div id="scoreBox">
+        <div>X Score: <span id="xScore">0</span></div>
+        <div>Turn: <span id="currentTurn">O</span></div>
+        <div>O Score: <span id="oScore">0</span></div>
+    </div>
+    <!-- initially invisible but visible when game ends to show message -->
+    <div id="gameBox">
+        <p id="gameMessage">Game Over</p>
+        <button id="restartBtn">RESTART</button>
+    </div>
     <!-- external js -->
     <script src="tic-tac-toe.js"></script>
 </body>

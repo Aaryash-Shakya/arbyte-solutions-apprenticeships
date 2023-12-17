@@ -20,6 +20,7 @@ body {
     height: 100vh;
     width: 100vw;
     background: var(--bg-color);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .board {
@@ -97,4 +98,55 @@ body {
 .circle::before,
 .cross::before {
     opacity: 1 !important;
+}
+
+#scoreBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* set 10vw but cant be less than 80px and cant be more than 110px */
+    height: clamp(80px, 10vw, 100px);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+}
+
+#currentTurn {
+    /* so that X and O takes equal width and gap wont change after each move */
+    /* min-width: 1rem; */
+    font-family: monospace;
+}
+
+#gameBox {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 5rem;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#restartBtn {
+    padding: 1rem 2rem;
+    font-size: 2.5rem;
+    margin: 1rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#restartBtn:hover {
+    background-color: #c1c1c1;
 }
