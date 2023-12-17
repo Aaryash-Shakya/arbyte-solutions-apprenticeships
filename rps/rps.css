@@ -30,7 +30,6 @@ body {
 
 #leftContainer,#rightContainer{
     width: 40%;
-    border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -40,4 +39,36 @@ body {
     height: 80%;
     background-color: whitesmoke;
     width: 1px;
+}
+
+.option{
+    height: 50%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 3rem;
+}
+
+.option img.option-svg{
+    min-height: 150px;
+    object-fit: cover;
+}
+
+.option p{
+    font-size: 1.5rem;
+}
+
+.option div.keyboard-key{
+    height: 60px;
+    aspect-ratio: 1;
+    font-size: 1.7rem;
+    color: black;
+    display: grid;
+    place-items: center;
+    padding: auto;
+    border: 4px solid white;
+    border-radius: 12px;
+    box-shadow: -2px 2px 5px black;
+    background-color: rgba(255,255,255,0.3);
 }
