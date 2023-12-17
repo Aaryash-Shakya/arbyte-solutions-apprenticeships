@@ -92,3 +92,9 @@ body {
 .hover-cross::before {
     opacity: 0.5;
 }
+
+/* non hover elements must have opacity 1 */
+.circle::before,
+.cross::before {
+    opacity: 1 !important;
+}
