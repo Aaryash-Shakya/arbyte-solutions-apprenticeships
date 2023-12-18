@@ -4,17 +4,32 @@ const p1StatusBox = document.querySelector("#leftContainer .status-box");
 const p2StatusBox = document.querySelector("#rightContainer .status-box");
 const p1ScoreBox = document.getElementById("p1Score");
 const p2ScoreBox = document.getElementById("p2Score");
-const p1Options = document.querySelectorAll('#leftContainer .keyboard-key')
-const p2Options = document.querySelectorAll('#rightContainer .keyboard-key')
+const p1Options = document.querySelectorAll("#leftContainer .keyboard-key");
+const p2Options = document.querySelectorAll("#rightContainer .keyboard-key");
+const opponentToggleButton = document.getElementById("opponentToggleButton");
+const opponent = document.getElementById("opponent");
 
 // choice 0 = rock, 1 = paper, 2 = scissor
 let p1Choice = -1;
 let p2Choice = -1;
+let pvp = true; // default
 
 // ! functions
 
+opponentToggleButton.onclick = () => {
+    if (pvp) {
+        opponent.innerText = "PVC";
+        pvp = false;
+    } else {
+        opponent.innerText = "PVP";
+        pvp = true;
+    }
+    // restart game
+    startGame();
+};
+
 const player1Listener = event => {
-    console.log(event.code);
+    // console.log(event.code);
     // todo find better way to listen only once
     // note {once: true} doesn't work coz it will remove listener on making invalid move
     if (event.code == "KeyA") {
@@ -39,7 +54,6 @@ const getPlayer1Choice = () => {
 };
 
 const player2Listener = event => {
-    console.log(event.code);
     if (event.code == "KeyJ") {
         p2Choice = 0;
         document.removeEventListener("keydown", player2Listener);
@@ -61,6 +75,19 @@ const getPlayer2Choice = () => {
     document.addEventListener("keydown", player2Listener);
 };
 
+const getComputerChoice = () => {
+    // add random delay to make it look natural
+    // range 400-1499 ms
+    randomDelay = Math.floor(Math.random() * 1100) + 400;
+    setTimeout(() => {
+        p2Choice = Math.floor(Math.random() * 3);
+        p2StatusBox.innerText = "✅ SELECTED";
+        console.log(p2Choice);
+        // incase user makes first move prevent stall
+        checkWin();
+    }, randomDelay);
+};
+
 const startGame = () => {
     // reset player choice
     p1Choice = -1;
@@ -69,7 +96,24 @@ const startGame = () => {
     p2StatusBox.innerText = "🤔 THINKING";
 
     getPlayer1Choice();
-    getPlayer2Choice();
+    if (pvp) {
+        getPlayer2Choice();
+    } else {
+        getComputerChoice();
+    }
+};
+
+const displayResult = () => {
+    p1Options[p1Choice].style.backgroundColor = "#28a745";
+    p2Options[p2Choice].style.backgroundColor = "#28a745";
+};
+
+const hideResult = () => {
+    p1Options[p1Choice].style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+    p2Options[p2Choice].style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+    p2Options.forEach(option => {
+        option.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+    });
 };
 
 const checkWin = () => {
@@ -79,16 +123,6 @@ const checkWin = () => {
     if (p1Choice === p2Choice) handleWin("draw");
     else if ((p1Choice + 1) % 3 == p2Choice) handleWin("P2");
     else if (p1Choice == (p2Choice + 1) % 3) handleWin("P1");
-};
-
-const displayResult = () => {
-    p1Options[p1Choice].style.backgroundColor = '#28a745'
-    p2Options[p2Choice].style.backgroundColor = '#28a745'
-};
-
-const hideResult = () => {
-    p1Options[p1Choice].style.backgroundColor = 'rgba(255, 255, 255, 0.3)'
-    p2Options[p2Choice].style.backgroundColor = 'rgba(255, 255, 255, 0.3)'
 };
 
 const handleWin = state => {
@@ -105,7 +139,7 @@ const handleWin = state => {
     setTimeout(() => {
         hideResult();
         startGame();
-    }, 1000);
+    }, 1200);
 };
 
 // ! driver code
