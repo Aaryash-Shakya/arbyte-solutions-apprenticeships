@@ -2,6 +2,10 @@
 
 const p1StatusBox = document.querySelector("#leftContainer .status-box");
 const p2StatusBox = document.querySelector("#rightContainer .status-box");
+const p1ScoreBox = document.getElementById("p1Score");
+const p2ScoreBox = document.getElementById("p2Score");
+const p1Options = document.querySelectorAll('#leftContainer .keyboard-key')
+const p2Options = document.querySelectorAll('#rightContainer .keyboard-key')
 
 // choice 0 = rock, 1 = paper, 2 = scissor
 let p1Choice = -1;
@@ -77,17 +81,31 @@ const checkWin = () => {
     else if (p1Choice == (p2Choice + 1) % 3) handleWin("P1");
 };
 
+const displayResult = () => {
+    p1Options[p1Choice].style.backgroundColor = '#28a745'
+    p2Options[p2Choice].style.backgroundColor = '#28a745'
+};
+
+const hideResult = () => {
+    p1Options[p1Choice].style.backgroundColor = 'rgba(255, 255, 255, 0.3)'
+    p2Options[p2Choice].style.backgroundColor = 'rgba(255, 255, 255, 0.3)'
+};
+
 const handleWin = state => {
     if (state == "draw") {
-        console.log('draw');
+        console.log("draw");
     } else if (state == "P1") {
-        console.log('p1 win');
+        console.log("p1 win");
+        p1ScoreBox.innerText = Number(p1ScoreBox.innerText) + 1;
     } else if (state == "P2") {
-        console.log('p2 win');
+        console.log("p2 win");
+        p2ScoreBox.innerText = Number(p2ScoreBox.innerText) + 1;
     }
-    setTimeout(()=>{
-        startGame()
-    },2000)
+    displayResult();
+    setTimeout(() => {
+        hideResult();
+        startGame();
+    }, 1000);
 };
 
 // ! driver code
