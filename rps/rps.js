@@ -8,6 +8,7 @@ const p1Options = document.querySelectorAll("#leftContainer .keyboard-key");
 const p2Options = document.querySelectorAll("#rightContainer .keyboard-key");
 const opponentToggleButton = document.getElementById("opponentToggleButton");
 const opponent = document.getElementById("opponent");
+const messageBox = document.getElementById("messageBox");
 
 // choice 0 = rock, 1 = paper, 2 = scissor
 let p1Choice = -1;
@@ -77,8 +78,8 @@ const getPlayer2Choice = () => {
 
 const getComputerChoice = () => {
     // add random delay to make it look natural
-    // range 400-1499 ms
-    randomDelay = Math.floor(Math.random() * 1100) + 400;
+    // range 500-1999 ms
+    randomDelay = Math.floor(Math.random() * 1500) + 500;
     setTimeout(() => {
         p2Choice = Math.floor(Math.random() * 3);
         p2StatusBox.innerText = "✅ SELECTED";
@@ -106,35 +107,34 @@ const startGame = () => {
 const displayResult = () => {
     p1Options[p1Choice].style.backgroundColor = "#28a745";
     p2Options[p2Choice].style.backgroundColor = "#28a745";
+    messageBox.style.display = "grid";
 };
 
 const hideResult = () => {
     p1Options[p1Choice].style.backgroundColor = "rgba(255, 255, 255, 0.3)";
     p2Options[p2Choice].style.backgroundColor = "rgba(255, 255, 255, 0.3)";
-    p2Options.forEach(option => {
-        option.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
-    });
+    messageBox.style.display = "none";
 };
 
 const checkWin = () => {
     // only one player has made a move do nth
     if (p1Choice === -1 || p2Choice === -1) return;
 
-    if (p1Choice === p2Choice) handleWin("draw");
-    else if ((p1Choice + 1) % 3 == p2Choice) handleWin("P2");
-    else if (p1Choice == (p2Choice + 1) % 3) handleWin("P1");
+    if (p1Choice === p2Choice) handleWin("Draw");
+    else if ((p1Choice + 1) % 3 == p2Choice) handleWin("P2 Win");
+    else if (p1Choice == (p2Choice + 1) % 3) handleWin("P1 Win");
 };
 
 const handleWin = state => {
-    if (state == "draw") {
-        console.log("draw");
-    } else if (state == "P1") {
-        console.log("p1 win");
+    console.log(state);
+    if (state == "Draw") {
+        // do nth
+    } else if (state == "P1 Win") {
         p1ScoreBox.innerText = Number(p1ScoreBox.innerText) + 1;
-    } else if (state == "P2") {
-        console.log("p2 win");
+    } else if (state == "P2 Win") {
         p2ScoreBox.innerText = Number(p2ScoreBox.innerText) + 1;
     }
+    messageBox.innerText = state;
     displayResult();
     setTimeout(() => {
         hideResult();
