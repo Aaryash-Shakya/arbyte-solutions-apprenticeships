@@ -7,7 +7,10 @@
 }
 
 :root {
-    --bg-color: black;
+    --background: black;
+    --text: white;
+    --calculator: #1b1b1b;
+    --screen: #4f4f4f;
     --keys-gray: #a5a5a5;
     --keys-dark-gray: #333333;
     --keys-orange: #ff9f0a;
@@ -23,6 +26,22 @@ body {
     width: 100vw;
     font-family: Arial, Helvetica, sans-serif;
     transition: all 300ms ease-in-out;
+    background-color: var(--background);
+}
+
+.calculator {
+    background-color: var(--calculator);
+    border: 1px solid var(--text);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.screen {
+    height: calc(var(--key-size) * 2);
+    width: auto;
+    background-color: var(--screen);
+    margin: 10px;
+    color: var(--text);
 }
 
 .keypad {
@@ -31,6 +50,8 @@ body {
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
+
+    padding: 10px;
 }
 
 /* key grid placement */
@@ -92,23 +113,44 @@ body {
     grid-area: 5 / 4 / 6 / 5;
 }
 
-.keypad {
-    height: fit-content;
-    width: fit-content;
-    padding: 10px;
-    border: 1px solid black;
-}
-
 .keys {
     height: var(--key-size);
     width: var(--key-size);
     /* aspect-ratio: 1; */
-    background-color: var(--keys-gray);
-    padding: 1rem;
+    background-color: var(--keys-dark-gray);
+    color: var(--text);
+    font-size: 1.8rem;
+    padding: 0.5rem;
     display: grid;
     place-items: center;
     border-radius: calc(var(--key-size) / 2);
     cursor: pointer;
+}
+
+.keys:hover {
+    filter: brightness(120%);
+}
+
+#key_AC,
+#key_plus-minus,
+#key_percentage {
+    background-color: var(--keys-gray);
+}
+
+#key_divide,
+#key_multiply,
+#key_minus,
+#key_plus,
+#key_equals {
+    background-color: var(--keys-orange);
+}
+
+#key_divide:hover,
+#key_multiply:hover,
+#key_minus:hover,
+#key_plus:hover,
+#key_equals:hover {
+    filter: brightness(80%);
 }
 
 #key_0 {
