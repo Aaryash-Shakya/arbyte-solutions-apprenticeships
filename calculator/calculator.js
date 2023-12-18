@@ -24,6 +24,9 @@ let result = document.getElementById("result");
 
 let inputString = "";
 let resultString = "0";
+const numberAndDot = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+const operators = ["+", "-", "*", "/"];
+let operatorExists = false;
 
 // ! functions
 
@@ -33,30 +36,86 @@ const updateScreen = () => {
     result.innerText = resultString;
 };
 
+const concatenateToInput = value => {
+    inputString += value;
+    updateScreen();
+};
+
+const handleOperators = sign => {
+    // if blank
+    if (inputString === "") return;
+
+    // if last digit operator replace it
+    lastDigit = inputString.split("").pop();
+    if (operators.includes(lastDigit)) {
+        inputString = inputString.slice(0, -1);
+        concatenateToInput(sign);
+        return;
+    }
+
+    // if operator already used
+    if (operatorExists) {
+        console.log("Only one operator per equation");
+        return;
+    }
+
+    operatorExists = true;
+    concatenateToInput(sign);
+};
+
 // add click event listener
-const handleClick = ()=>{
+const handleClick = () => {
     // reset
     keyAC.onclick = () => {
         inputString = "";
         resultString = "0";
+        operatorExists = false;
         updateScreen();
     };
-    
+
     // handle all numbers
-    for(i=0;i<=9;i++){
-        const temp = document.getElementById(`key_${i}`)
-        temp.onclick=()=>{
+    for (i = 0; i <= 9; i++) {
+        const temp = document.getElementById(`key_${i}`);
+
+        // todo there probably exists a better way to do this
+        temp.onclick = () => {
             // using i will always get 10
             const number = temp.id.slice(4);
-            console.log(number)
-            inputString+=number
-            console.log(inputString);
-            updateScreen()
-        }
+            concatenateToInput(number);
+        };
     }
-}
 
+    // arithmetic operators
+    keyPlus.onclick = () => {
+        handleOperators("+");
+    };
+    keyMinus.onclick = () => {
+        handleOperators("-");
+    };
+    keyMultiply.onclick = () => {
+        handleOperators("*");
+    };
+    keyDivide.onclick = () => {
+        handleOperators("/");
+    };
+    keyPercentage.onclick = () => {
+        concatenateToInput("%");
+    };
+
+    // equals to
+    keyEquals.onclick = () => {
+        // const regex = /(\d+(\.\d+)?)?([+\-x/])(\d+(\.\d+)?)/g;
+        // const regex = /([+\-*/])|\b(\d+(\.\d+)?)\b/g;
+        // const matches = inputString.match(regex);
+
+        // inputString.replace(/%/g,'/100')
+        // console.log(inputString);
+        resultString = eval(inputString)
+        console.log(resultString);
+        updateScreen();
+    };
+};
 
 // ! driver code
 
-handleClick()
+handleClick();
