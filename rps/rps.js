@@ -16,15 +16,15 @@ const player1Listener = event => {
     if (event.code == "KeyA") {
         p1Choice = 0;
         document.removeEventListener("keydown", player1Listener);
-        p1StatusBox.innerText = "SELECTED";
+        p1StatusBox.innerText = "✅ SELECTED";
     } else if (event.code == "KeyS") {
         p1Choice = 1;
         document.removeEventListener("keydown", player1Listener);
-        p1StatusBox.innerText = "SELECTED";
+        p1StatusBox.innerText = "✅ SELECTED";
     } else if (event.code == "KeyD") {
         p1Choice = 2;
         document.removeEventListener("keydown", player1Listener);
-        p1StatusBox.innerText = "SELECTED";
+        p1StatusBox.innerText = "✅ SELECTED";
     }
     console.log(p1Choice);
     checkWin();
@@ -39,15 +39,15 @@ const player2Listener = event => {
     if (event.code == "KeyJ") {
         p2Choice = 0;
         document.removeEventListener("keydown", player2Listener);
-        p2StatusBox.innerText = "SELECTED";
+        p2StatusBox.innerText = "✅ SELECTED";
     } else if (event.code == "KeyK") {
         p2Choice = 1;
         document.removeEventListener("keydown", player2Listener);
-        p2StatusBox.innerText = "SELECTED";
+        p2StatusBox.innerText = "✅ SELECTED";
     } else if (event.code == "KeyL") {
         p2Choice = 2;
         document.removeEventListener("keydown", player2Listener);
-        p2StatusBox.innerText = "SELECTED";
+        p2StatusBox.innerText = "✅ SELECTED";
     }
     console.log(p2Choice);
     checkWin();
@@ -61,8 +61,8 @@ const startGame = () => {
     // reset player choice
     p1Choice = -1;
     p2Choice = -1;
-    p1StatusBox.innerText = "THINKING";
-    p2StatusBox.innerText = "THINKING";
+    p1StatusBox.innerText = "🤔 THINKING";
+    p2StatusBox.innerText = "🤔 THINKING";
 
     getPlayer1Choice();
     getPlayer2Choice();
@@ -72,9 +72,22 @@ const checkWin = () => {
     // only one player has made a move do nth
     if (p1Choice === -1 || p2Choice === -1) return;
 
-    if (p1Choice === p2Choice) alert("draw");
-    else if ((p1Choice + 1) % 3 == p2Choice) alert("P2 wins");
-    else if (p1Choice == (p2Choice + 1) % 3) alert("P1 wins");
+    if (p1Choice === p2Choice) handleWin("draw");
+    else if ((p1Choice + 1) % 3 == p2Choice) handleWin("P2");
+    else if (p1Choice == (p2Choice + 1) % 3) handleWin("P1");
+};
+
+const handleWin = state => {
+    if (state == "draw") {
+        console.log('draw');
+    } else if (state == "P1") {
+        console.log('p1 win');
+    } else if (state == "P2") {
+        console.log('p2 win');
+    }
+    setTimeout(()=>{
+        startGame()
+    },2000)
 };
 
 // ! driver code
