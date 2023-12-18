@@ -56,7 +56,20 @@
             </div>
         </div>
     </div>
-
+    <!-- position fixed to top -->
+    <div id="scoreBox">
+        <div>P1 Score: <span id="p1Score">0</span></div>
+        <!-- the middle div is just to fix the spacing -->
+        <div id="opponentToggleButton">
+            <span id="opponent">PVP</span> <img class="swap-svg" src="svg/swap.svg" alt="swap icon up down arrow">
+        </div>
+        <div>P2 Score: <span id="p2Score">0</span></div>
+    </div>
+    <!-- initially invisible but visible when game ends to show message -->
+    <div id="messageBox">
+        <p id="gameMessage">Game Over</p>
+        <button id="restartBtn">RESTART</button>
+    </div>
     <!-- external js -->
     <script src="rps.js"></script>
 </body>
