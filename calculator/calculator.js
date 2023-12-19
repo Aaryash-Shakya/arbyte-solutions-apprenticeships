@@ -26,7 +26,6 @@ let inputString = "";
 let resultString = "0";
 const numberAndDot = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 const operators = ["+", "-", "*", "/"];
-let operatorExists = false;
 
 // ! functions
 
@@ -43,7 +42,7 @@ const concatenateToInput = value => {
 
 const handleOperators = sign => {
     // if blank
-    if (inputString === "") return;
+    if (inputString === "" && (sign === "*" || sign === "/")) return;
 
     // if last digit operator replace it
     lastDigit = inputString.split("").pop();
@@ -53,13 +52,6 @@ const handleOperators = sign => {
         return;
     }
 
-    // if operator already used
-    if (operatorExists) {
-        console.log("Only one operator per equation");
-        return;
-    }
-
-    operatorExists = true;
     concatenateToInput(sign);
 };
 
@@ -69,7 +61,6 @@ const handleClick = () => {
     keyAC.onclick = () => {
         inputString = "";
         resultString = "0";
-        operatorExists = false;
         updateScreen();
     };
 
@@ -108,10 +99,8 @@ const handleClick = () => {
         // const regex = /([+\-*/])|\b(\d+(\.\d+)?)\b/g;
         // const matches = inputString.match(regex);
 
-        inputString.replace(/\%/g, "/100");
-        console.log(inputString);
-        resultString = eval(inputString);
-        console.log(resultString);
+        evalString = inputString.replace(/\%/g, "/100");
+        resultString = eval(evalString) || "Math Error";
         updateScreen();
     };
 
