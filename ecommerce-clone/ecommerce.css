@@ -1,0 +1,52 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --price: #f85606;
+    --star: #faca51;
+}
+
+.item-card {
+    padding: 1.5rem 1rem 1rem;
+    gap: 0.4rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-image {
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 0.6rem;
+}
+
+.item-title {
+    font-size: 1.2rem;
+}
+
+.item-price {
+    font-size: 1.3rem;
+    color: var(--price);
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+.item-rating {
+    color: gray;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.star-rating {
+    color: var(--star);
+}
+
+.cart-button{
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
