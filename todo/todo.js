@@ -5,27 +5,28 @@ const taskTitle = document.getElementById("taskTitle");
 const taskDescription = document.getElementById("taskDescription");
 const tasks = document.getElementById("tasks");
 
-let i = 0;
-let taskObjectArray = [
-    // {
-    //     id: 0,
-    //     title: "Do your hw",
-    //     description: "hw is good",
-    // },
-];
+let taskObjectArray=[];
 let taskString = "";
+let i = 0;
 
 // ! functions
 
 addTaskButton.onclick = () => {
+    // if title empty
+    if (taskTitle.value === "") {
+        alert("Title can't be empty");
+        return;
+    }
+
     // add new task to array
     let newTask = {
         id: i++,
         title: taskTitle.value,
-        description: taskDescription.value,
+        description: taskDescription.value || "description",
     };
     taskObjectArray.push(newTask);
 
+    setLocalStorage();
     updateDisplay();
 
     // clear input
@@ -36,6 +37,7 @@ addTaskButton.onclick = () => {
 // delete todo
 const deleteTodo = id => {
     taskObjectArray = taskObjectArray.filter(task => task.id != id);
+    setLocalStorage();
     updateDisplay();
 };
 
@@ -47,7 +49,7 @@ const updateDisplay = () => {
             <div class="d-flex align-items-center justify-content-between border border-1 border-black p-4 rounded-2 shadow-sm m02">
             <div>
                 <h3>${task.title}</h3>
-                <p>${task.description}</p>
+                <p class="text-muted">${task.description}</p>
             </div>
             <button class="btn btn-danger" onclick="deleteTodo(${task.id})">Delete</button>
             </div>
@@ -57,3 +59,26 @@ const updateDisplay = () => {
 
     tasks.innerHTML = taskString;
 };
+
+const setLocalStorage = () => {
+    localStorage.setItem(`taskArray`, JSON.stringify(taskObjectArray));
+};
+
+const getLocalStorage = () => {
+    if(localStorage.getItem("taskArray")){
+        let taskArray = localStorage.getItem("taskArray");
+        taskObjectArray = JSON.parse(taskArray);
+    }
+};
+
+// ! driver code
+
+// fetch the data from local storage
+getLocalStorage();
+
+// check current pointer
+if (taskObjectArray.length!==0) {
+    i = taskObjectArray[taskObjectArray.length - 1].id + 1;
+    updateDisplay();
+}
+console.log(`current pointer is at ${i}`);
