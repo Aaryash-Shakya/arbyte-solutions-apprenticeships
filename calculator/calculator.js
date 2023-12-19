@@ -108,10 +108,17 @@ const handleClick = () => {
         // const regex = /([+\-*/])|\b(\d+(\.\d+)?)\b/g;
         // const matches = inputString.match(regex);
 
-        // inputString.replace(/%/g,'/100')
-        // console.log(inputString);
-        resultString = eval(inputString)
+        inputString.replace(/\%/g, "/100");
+        console.log(inputString);
+        resultString = eval(inputString);
         console.log(resultString);
+        updateScreen();
+    };
+
+    // backspace
+    keyPlusMinus.onclick = () => {
+        if (inputString === "") return;
+        inputString = inputString.slice(0, -1);
         updateScreen();
     };
 };

@@ -145,6 +145,10 @@ body {
     filter: brightness(120%);
 }
 
+.keys img{
+    height: 1.8rem;
+}
+
 #key_AC,
 #key_plus-minus,
 #key_percentage {
