@@ -5,7 +5,7 @@ const taskTitle = document.getElementById("taskTitle");
 const taskDescription = document.getElementById("taskDescription");
 const tasks = document.getElementById("tasks");
 
-let taskObjectArray=[];
+let taskObjectArray = [];
 let taskString = "";
 let i = 0;
 
@@ -46,7 +46,7 @@ const updateDisplay = () => {
     taskObjectArray.forEach(task => {
         taskString += `
         <div class="col-md-6">
-            <div class="d-flex align-items-center justify-content-between border border-1 border-black p-4 rounded-2 shadow-sm m02">
+            <div class="task d-flex align-items-center justify-content-between border border-1 border-dark-subtle p-4 rounded-2 shadow m-2">
             <div>
                 <h3>${task.title}</h3>
                 <p class="text-muted">${task.description}</p>
@@ -65,7 +65,7 @@ const setLocalStorage = () => {
 };
 
 const getLocalStorage = () => {
-    if(localStorage.getItem("taskArray")){
+    if (localStorage.getItem("taskArray")) {
         let taskArray = localStorage.getItem("taskArray");
         taskObjectArray = JSON.parse(taskArray);
     }
@@ -77,7 +77,7 @@ const getLocalStorage = () => {
 getLocalStorage();
 
 // check current pointer
-if (taskObjectArray.length!==0) {
+if (taskObjectArray.length !== 0) {
     i = taskObjectArray[taskObjectArray.length - 1].id + 1;
     updateDisplay();
 }
