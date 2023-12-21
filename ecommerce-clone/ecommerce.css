@@ -50,3 +50,17 @@
     margin-top: 0.5rem;
     margin-bottom: 0;
 }
+
+
+/* for cart */
+.cart-card{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.cart-image{
+    height: 100px;
+    aspect-ratio: 1;
+}

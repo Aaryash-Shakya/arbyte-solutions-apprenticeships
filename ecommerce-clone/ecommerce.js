@@ -8,7 +8,7 @@ let cartItems = [];
 let fullStar = '<i class="fa-solid fa-star"></i>';
 let outlineStar = '<i class="fa-regular fa-star"></i>';
 
-let temp = {
+let item = {
     id: 1,
     title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
     price: 109.95,
