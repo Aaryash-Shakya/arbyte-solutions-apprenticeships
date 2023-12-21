@@ -11,11 +11,11 @@
     --star: #faca51;
 }
 
-header{
+header {
     background-color: var(--accent);
 }
 
-.nav-link{
+.nav-link {
     font-family: 2rem !important;
 }
 
@@ -54,21 +54,24 @@ header{
     color: var(--star);
 }
 
-.cart-button{
+.cart-button {
     margin-top: 0.5rem;
     margin-bottom: 0;
 }
 
-
 /* for cart */
-.cart-card{
+.cart-card {
     width: 100%;
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.cart-image{
+.cart-image {
     height: 150px;
     object-fit: contain;
+}
+
+.cart-price {
+    color: var(--accent);
 }

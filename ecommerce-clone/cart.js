@@ -34,16 +34,16 @@ const updateCart = () => {
         let itemData = cartItemsData[i];
         cartString += `
                 <div class="cart-card border border-1 border-dark-subtle shadow rounded p-1 py-md-3 px-md-4 row">
-                    <div class="cart-number col-1">${index++}</div>
+                    <div class="cart-number col-1 fs-5">${index++}.</div>
                     <img src="${itemData.image}" class="cart-image col-2" width="40" height="40" alt="">
                     <div class="cart-title col-4">${itemData.title}</div>
-                    <div class="cart-price col-1">Rs ${itemData.price}</div>
+                    <div class="cart-price col-2 fs-5">Rs ${itemData.price}</div>
                     <div class="cart-title col-2">
                         <span class="btn btn-primary cart-subtract" onclick="decreaseQuantity(${itemData.id})">-</span>
                         <span class="cart-quantity"> ${cartItems[i].quantity} </span>
                         <span class="btn btn-primary cart-add" onclick="increaseQuantity(${itemData.id})">+</span>
                     </div>
-                    <div class="col-2">
+                    <div class="col-1">
                         <div class="cart-delete btn btn-danger" onclick="deleteItem(${itemData.id})">Delete</div>
                     </div>
                 </div>
