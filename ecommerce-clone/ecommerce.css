@@ -7,8 +7,16 @@
 }
 
 :root {
-    --price: #f85606;
+    --accent: #f85606;
     --star: #faca51;
+}
+
+header{
+    background-color: var(--accent);
+}
+
+.nav-link{
+    font-family: 2rem !important;
 }
 
 .item-card {
@@ -31,7 +39,7 @@
 
 .item-price {
     font-size: 1.3rem;
-    color: var(--price);
+    color: var(--accent);
     margin-top: auto;
     margin-bottom: 0;
 }
