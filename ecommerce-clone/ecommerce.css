@@ -61,6 +61,6 @@
 }
 
 .cart-image{
-    height: 100px;
-    aspect-ratio: 1;
+    height: 150px;
+    object-fit: contain;
 }
