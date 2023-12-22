@@ -9,7 +9,7 @@ const Accordian = () => {
     }
     return (
         <>
-            <div className="wrapper flex w-full h-fill justify-center items-center">
+            <div className="wrapper">
                 <div className="accordian w-6/12">
                     {
                         data.map((item, index) => (
