@@ -8,11 +8,31 @@ app.use(
 	})
 );
 
+const delay = 1000;
+
 // GET API
-app.get("/demo", (req, res) => {
+app.get("/demo1", (req, res) => {
 	setTimeout(() => {
-		res.send("Hello World");
-	}, 5000);
+		res.send("Hello World 1");
+	}, delay);
+});
+
+app.get("/demo2", (req, res) => {
+	setTimeout(() => {
+		res.send("Hello World 2");
+	}, delay);
+});
+
+app.get("/demo3", (req, res) => {
+	setTimeout(() => {
+		res.send("Hello World 3");
+	}, delay);
+});
+
+app.get("/demo4", (req, res) => { 
+	setTimeout(() => {
+		res.send("Hello World 4");
+	}, delay);
 });
 
 // Start the server
